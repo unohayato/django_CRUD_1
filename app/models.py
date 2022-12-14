@@ -14,11 +14,11 @@ class Tag(models.Model):
 
 class Post(models.Model):
   title = models.CharField(max_length=255, blank=False, null=False)
-  body = models.TextField()
-  created = models.DateTimeField(auto_now_add=True)
-  updated = models.DateTimeField(auto_now=True)
+  body = models.TextField(blank=True, null=False)
+  created = models.DateTimeField(editable=False, auto_now_add=True, blank=False, null=False)
+  updated = models.DateTimeField(editable=False, auto_now=True, blank=True, null=False)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
-  tags = models.ManyToManyField(Tags, blank=True)
+  tags = models.ManyToManyField(Tag, blank=True)
   
   def __str__(self):
     return self.title
